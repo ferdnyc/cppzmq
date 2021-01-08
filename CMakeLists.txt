@@ -16,7 +16,9 @@ if (NOT TARGET libzmq AND NOT TARGET libzmq-static)
     find_package(ZeroMQ REQUIRED)
   endif()
 
-  # TODO "REQUIRED" above should already cause a fatal failure if not found, but this doesn't seem to work
+  # TODO Because FindZeroMQ.cmake uses result variables in a way that's
+  #      not fully compatible, it doesn't use FindPackageHandleStandardArgs
+  #      which means the ``REQUIRED'' above has no effect
   if(NOT ZeroMQ_FOUND)
     message(FATAL_ERROR "ZeroMQ was not found, neither as a CMake package nor via pkg-config")
   endif()
